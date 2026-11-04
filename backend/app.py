@@ -297,7 +297,7 @@ def root_status_report():
     <!-- Header -->
     <div class="header-card">
       <div class="brand">
-        <div class="logo">🗑️</div>
+        <div class="logo">♻️</div>
         <div>
           <h1>WasteSegregator AI — Backend Service</h1>
           <div class="subtitle">Autonomous Computer Vision & Municipal Waste Segregation Engine</div>
@@ -1044,7 +1044,7 @@ if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     debug_mode = os.environ.get('FLASK_DEBUG', 'false').lower() in ('true', '1')
     print("\n" + "=" * 65)
-    print("🗑️ AI-Based Smart Garbage Waste Segregator Backend")
+    print("♻️  WasteSegregator AI — Backend REST Service")
     print("=" * 65)
     print(f"Server Port: {port}")
     print(f"Health API:  http://localhost:{port}/api/health")

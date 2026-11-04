@@ -8,7 +8,7 @@ BACKEND_DIR="$PROJECT_ROOT/backend"
 FRONTEND_DIR="$PROJECT_ROOT/frontend"
 
 echo "=============================================================="
-echo "🗑️  AI-Based Smart Garbage Waste Segregator"
+echo "♻️  WasteSegregator AI — Autonomous Municipal Waste Sorter"
 echo "=============================================================="
 
 # Check if Backend is running on port 5000

@@ -76,7 +76,9 @@ const DetectionPage = () => {
   const [autoSpeak, setAutoSpeak] = useState(false);
 
   // Modals
-  const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
+  const [isAuditModalOpen, setIsAuditModalOpen] = useState(
+    typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('audit') === 'true'
+  );
   const [dossierItem, setDossierItem] = useState(null);
 
   // Canvas Refs

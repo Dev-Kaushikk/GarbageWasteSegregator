@@ -14,7 +14,7 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}🗑️  Garbage Waste Segregator Backend Manager${NC}"
+echo -e "${BLUE}♻️  WasteSegregator AI — Backend Manager${NC}"
 echo -e "${BLUE}===========================================${NC}"
 
 # Check if running inside the project
