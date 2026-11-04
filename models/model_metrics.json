@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-10-31T23:55:00.000000",
+  "model": "YOLO11n-15Class-100Epochs-Master",
+  "classes_count": 15,
+  "dataset": "waste_15class_master",
+  "total_images": 6349,
+  "epochs": 100,
+  "best_epoch": 84,
+  "test_map50": 0.6621,
+  "test_map50_95": 0.3760,
+  "test_precision": 0.7098,
+  "test_recall": 0.6100,
+  "peak_precision": 0.7422,
+  "peak_recall": 0.6231,
+  "weights_path": "/Users/devkaushik/Desktop/GarbageWasteSegregator/models/yolo11n_15class_best.pt",
+  "hardware": "High-Performance GPU Training (100 Epochs Full Master)"
+}

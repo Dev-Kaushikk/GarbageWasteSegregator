@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+backend/venv/
+env/
+venv/
+ENV/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Node / Frontend
+frontend/node_modules/
+frontend/build/
+.npm
+.eslintcache
+
+# SQLite Database & Uploads
+*.sqlite3
+*.db
+backend/database/*.db
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/results/*
+!backend/results/.gitkeep
+backend/*.log
+frontend/*.log
+
+# Large Datasets, Archives & Temporary Weights
+datasets/
+archive/
+runs/
+ziSleSkb
+*.zip
+*.tar.gz
+*.pt.part*
+
+# macOS System Files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sensitive Environment Files
+.env
+.env.local
+.env.development.local
+.env.production.local
+
+# Ultralytics Cache
+runs/detect/predict*
+/tmp/ultralytics
+
