@@ -1,26 +1,28 @@
 /**
- * AutomataX-Styled Compact Top Navigation Bar
- * AI-Based Smart Garbage Waste Segregator
+ * WasteSegregator AI — Enterprise Responsive Navigation Bar
+ * Perfectly aligned across all screen resolutions (Mobile, Laptop, Desktop).
  */
 import React, { useState, useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard,
   ScanLine,
   History,
-  BarChart3,
   Info,
   Sliders,
   Sparkles,
-  Database,
   Cpu,
-  Recycle
+  Recycle,
+  Menu,
+  X
 } from 'lucide-react';
 import { checkHealth } from '../services/api';
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [health, setHealth] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     checkHealth()
@@ -28,40 +30,45 @@ const Navbar = () => {
       .catch(() => setHealth(null));
   }, []);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
   const navItems = [
     { to: '/', label: 'Home', icon: Sparkles, exact: true },
-    { to: '/detect', label: 'Waste Scanner', icon: ScanLine },
+    { to: '/detect', label: 'Scanner', icon: ScanLine },
     { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { to: '/history', label: 'History', icon: History },
-    { to: '/training', label: 'Model Benchmark', icon: Cpu },
-    { to: '/settings', label: 'Engine Settings', icon: Sliders },
+    { to: '/training', label: 'Benchmarks', icon: Cpu },
+    { to: '/settings', label: 'Settings', icon: Sliders },
     { to: '/about', label: 'About', icon: Info },
   ];
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-2xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-[60px]">
+        <div className="flex items-center justify-between h-[60px] gap-2">
           {/* Brand Logo & Name */}
           <div
             onClick={() => navigate('/')}
-            className="flex items-center gap-2.5 cursor-pointer select-none group flex-shrink-0"
+            className="flex items-center gap-2 sm:gap-2.5 cursor-pointer select-none group flex-shrink-0"
           >
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-emerald-500 flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-all duration-150">
-              <Recycle className="w-5 h-5 text-white" />
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-emerald-500 flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform duration-150">
+              <Recycle className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-slate-800 text-[15px] tracking-tight leading-none group-hover:text-blue-600 transition-colors">
-                WasteSegregator <span className="text-blue-600 font-bold">AI</span>
+              <span className="font-extrabold text-slate-900 text-sm sm:text-[15px] tracking-tight leading-none group-hover:text-blue-600 transition-colors">
+                WasteSegregator <span className="text-blue-600 font-extrabold">AI</span>
               </span>
-              <span className="text-[10px] text-slate-400 font-medium tracking-wide mt-0.5">
-                Computer Vision & Municipal Waste Sorting
+              <span className="text-[10px] text-slate-400 font-medium tracking-wide mt-0.5 hidden 2xl:block">
+                Computer Vision & Municipal Sorting
               </span>
             </div>
           </div>
 
-          {/* Nav Links */}
-          <nav className="hidden lg:flex items-center gap-1">
+          {/* Desktop Nav Links (Perfectly Centered & Aligned) */}
+          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1">
             {navItems.map((item) => {
               const Icon = item.icon;
               return (
@@ -70,53 +77,85 @@ const Navbar = () => {
                   to={item.to}
                   end={item.exact}
                   className={({ isActive }) =>
-                    `px-2.5 sm:px-3 py-1.5 rounded-lg text-xs sm:text-[13px] font-semibold flex items-center gap-1.5 whitespace-nowrap transition-all duration-150 border ${
+                    `px-2.5 xl:px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap transition-all duration-150 border ${
                       isActive
-                        ? 'bg-blue-50 text-blue-700 font-bold border-blue-200/70 shadow-2xs'
-                        : 'border-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
+                        ? 'bg-blue-50 text-blue-700 font-bold border-blue-200/80 shadow-2xs'
+                        : 'border-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
                     }`
                   }
                 >
                   <Icon className="w-3.5 h-3.5 flex-shrink-0" />
-                  <span className="whitespace-nowrap">{item.label}</span>
+                  <span>{item.label}</span>
                 </NavLink>
               );
             })}
           </nav>
 
-          {/* Right Status Pill & CTA */}
-          <div className="flex items-center gap-2.5 flex-shrink-0">
-            {/* System Status Pill (Compact) */}
+          {/* Right Status Pill, Quick CTA & Mobile Hamburger */}
+          <div className="flex items-center gap-2 flex-shrink-0">
+            {/* Live API Status Badge */}
             <div
-              className={`hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold border ${
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold border ${
                 health?.status === 'healthy'
                   ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
                   : 'bg-rose-50 text-rose-700 border-rose-200'
               }`}
             >
-              {health?.status === 'healthy' ? (
-                <>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>API Online</span>
-                </>
-              ) : (
-                <>
-                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
-                  <span>API Offline</span>
-                </>
-              )}
+              <span
+                className={`w-1.5 h-1.5 rounded-full ${
+                  health?.status === 'healthy' ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'
+                }`}
+              />
+              <span className="hidden sm:inline">
+                {health?.status === 'healthy' ? 'API Online' : 'API Offline'}
+              </span>
             </div>
 
-            {/* Quick Action Button (Compact) */}
+            {/* Quick Action Button (Desktop CTA) */}
             <button
               onClick={() => navigate('/detect')}
-              className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-lg text-xs font-bold shadow-xs transition-all duration-150 flex items-center gap-1.5 whitespace-nowrap"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-lg text-xs font-bold shadow-xs transition-all whitespace-nowrap cursor-pointer"
             >
-              <ScanLine className="w-3.5 h-3.5 flex-shrink-0" />
+              <ScanLine className="w-3.5 h-3.5" />
               <span>Detect Waste</span>
+            </button>
+
+            {/* Mobile / Tablet Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200 transition-colors"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
+
+        {/* Mobile / Tablet Dropdown Menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden border-t border-slate-200 py-2 space-y-1 animate-in fade-in slide-in-from-top-2 duration-150">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  end={item.exact}
+                  className={({ isActive }) =>
+                    `px-3 py-2 rounded-lg text-xs font-semibold flex items-center gap-2.5 transition-colors ${
+                      isActive
+                        ? 'bg-blue-50 text-blue-700 font-bold border border-blue-200/80'
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                    }`
+                  }
+                >
+                  <Icon className="w-4 h-4 flex-shrink-0" />
+                  <span>{item.label}</span>
+                </NavLink>
+              );
+            })}
+          </div>
+        )}
       </div>
     </header>
   );
