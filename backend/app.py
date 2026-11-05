@@ -82,15 +82,34 @@ init_db()
 
 @app.route('/')
 def root_status_report():
-    """Serve visual Backend Health & Status Dashboard for localhost:5000."""
+    """Serve visual Backend Health & Status Dashboard for localhost:5000 matched to HomePage layout."""
     model_info = get_model_information()
     now_str = datetime.now().strftime("%B %d, %Y - %I:%M:%S %p")
+    
+    # 15 Target Classes with full metadata for visual taxonomy display
+    taxonomy_cards = [
+        {"id": 0, "name": "plastic_bottle", "display": "Plastic Bottle", "category": "Plastics", "bin": "Blue (Recyclable)", "color": "#2563EB", "icon": "🍾"},
+        {"id": 1, "name": "plastic_wrapper", "display": "Plastic Wrapper", "category": "Plastics", "bin": "Grey (RDF / General)", "color": "#475569", "icon": "🍬"},
+        {"id": 2, "name": "plastic_bag", "display": "Plastic Bag", "category": "Plastics", "bin": "Soft Plastic Depot", "color": "#6366F1", "icon": "🛍️"},
+        {"id": 3, "name": "plastic_container", "display": "Plastic Container", "category": "Plastics", "bin": "Blue (Recyclable)", "color": "#0284C7", "icon": "🥡"},
+        {"id": 4, "name": "paper", "display": "Paper", "category": "Paper & Fiber", "bin": "Blue (Paper)", "color": "#16A34A", "icon": "📄"},
+        {"id": 5, "name": "cardboard_carton", "display": "Cardboard Carton", "category": "Paper & Fiber", "bin": "Blue (Cardboard)", "color": "#D97706", "icon": "📦"},
+        {"id": 6, "name": "glass", "display": "Glass", "category": "Glass", "bin": "Teal/Blue (Glass)", "color": "#0284C7", "icon": "🥛"},
+        {"id": 7, "name": "metal_can", "display": "Metal Can", "category": "Metals", "bin": "Blue (Metals)", "color": "#D97706", "icon": "🥫"},
+        {"id": 8, "name": "metal_scrap", "display": "Metal Scrap", "category": "Metals", "bin": "Scrap Metal Depot", "color": "#EA580C", "icon": "🔩"},
+        {"id": 9, "name": "styrofoam", "display": "Styrofoam (EPS)", "category": "Polystyrene", "bin": "EPS Depot / Grey", "color": "#64748B", "icon": "🧊"},
+        {"id": 10, "name": "food_waste", "display": "Food Waste", "category": "Organics", "bin": "Green (Compost)", "color": "#16A34A", "icon": "🍎"},
+        {"id": 11, "name": "fruit_vegetable_peel", "display": "Fruit / Vegetable Peel", "category": "Organics", "bin": "Green (Compost)", "color": "#16A34A", "icon": "🍌"},
+        {"id": 12, "name": "garden_waste", "display": "Garden Waste", "category": "Organics", "bin": "Green (Yard Waste)", "color": "#15803D", "icon": "🌿"},
+        {"id": 13, "name": "textile", "display": "Textile", "category": "Textiles", "bin": "Clothing Donation", "color": "#7C3AED", "icon": "👕"},
+        {"id": 14, "name": "e_waste", "display": "E-Waste", "category": "Electronics", "bin": "E-Waste Depot", "color": "#DC2626", "icon": "🔋"},
+    ]
     
     html = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>WasteSegregator AI — Backend Status Report</title>
+  <title>WasteSegregator AI — Backend Service</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -101,97 +120,86 @@ def root_status_report():
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background-color: #F8FAFC;
       color: #0F172A;
-      padding: 32px 20px;
       line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
     }
-    .container {
-      max-width: 1180px;
+    .top-nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #E2E8F0;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+    .nav-container {
+      max-width: 1280px;
       margin: 0 auto;
-    }
-    .hero-card {
-      background: #FFFFFF;
-      border: 1px solid #E2E8F0;
-      border-radius: 16px;
-      padding: 28px 32px;
-      margin-bottom: 24px;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-    }
-    .hero-top {
+      padding: 0 24px;
+      height: 64px;
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 16px;
     }
-    .brand {
+    .nav-brand {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
+      text-decoration: none;
+      color: #0F172A;
     }
-    .logo {
-      width: 44px;
-      height: 44px;
+    .nav-logo {
+      width: 36px;
+      height: 36px;
       background: linear-gradient(135deg, #2563EB 0%, #10B981 100%);
-      border-radius: 12px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.25);
-      flex-shrink: 0;
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
     }
-    .logo svg {
-      width: 24px;
-      height: 24px;
+    .nav-logo svg {
+      width: 20px;
+      height: 20px;
       stroke: #FFFFFF;
     }
-    .brand-title {
-      font-size: 20px;
+    .nav-title {
+      font-size: 16px;
       font-weight: 800;
-      color: #0F172A;
       letter-spacing: -0.02em;
-      line-height: 1.2;
     }
-    .brand-title span {
+    .nav-title span {
       color: #2563EB;
     }
-    .badge-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      background: #EFF6FF;
-      border: 1px solid #BFDBFE;
-      color: #1D4ED8;
-      border-radius: 6px;
+    .nav-tag {
       font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 8px;
-    }
-    .hero-desc {
-      font-size: 13px;
+      font-weight: 600;
       color: #64748B;
-      line-height: 1.6;
-      max-w-2xl;
+      background: #F1F5F9;
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-left: 4px;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
     .status-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
+      gap: 6px;
+      padding: 5px 12px;
       background: #ECFDF5;
       color: #047857;
       border: 1px solid #A7F3D0;
       border-radius: 999px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
-      white-space: nowrap;
     }
     .pulse-dot {
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: #10B981;
       animation: pulse 1.5s infinite;
@@ -201,74 +209,365 @@ def root_status_report():
       50% { opacity: 0.4; transform: scale(0.85); }
       100% { opacity: 1; transform: scale(1); }
     }
-    .meta-bar {
-      margin-top: 20px;
-      padding-top: 18px;
-      border-top: 1px solid #F1F5F9;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #2563EB;
+      color: #FFFFFF;
+      padding: 7px 14px;
+      border-radius: 8px;
       font-size: 12px;
-    }
-    .meta-item span.label {
-      color: #94A3B8;
-      font-size: 11px;
-      display: block;
       font-weight: 600;
-      margin-bottom: 2px;
+      text-decoration: none;
+      transition: background 0.15s ease;
     }
-    .meta-item span.val {
-      font-weight: 700;
+    .nav-btn:hover {
+      background: #1D4ED8;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
+    .main-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 28px 24px 60px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
     }
-    .card {
+    /* Hero Section — Exact match to HomePage.jsx */
+    .hero-section {
       background: #FFFFFF;
       border: 1px solid #E2E8F0;
-      border-radius: 14px;
-      padding: 22px;
+      border-radius: 12px;
+      padding: 32px;
       box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
     }
-    .card-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: #94A3B8;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 6px;
-    }
-    .card-value {
-      font-size: 16px;
-      font-weight: 800;
-      color: #0F172A;
-      margin-bottom: 4px;
-    }
-    .card-desc {
-      font-size: 12px;
-      color: #64748B;
-    }
-    .section-title {
-      font-size: 14px;
-      font-weight: 800;
-      color: #0F172A;
-      letter-spacing: -0.01em;
-      margin-bottom: 14px;
+    .hero-content {
+      max-width: 768px;
       display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .badge-pill {
+      align-self: flex-start;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
+      padding: 4px 12px;
+      border-radius: 6px;
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      color: #1D4ED8;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .hero-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+    .hero-title span {
+      color: #2563EB;
+    }
+    .hero-desc {
+      color: #475569;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      padding-top: 4px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #2563EB;
+      color: #FFFFFF;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 1px 2px rgba(37, 99, 235, 0.15);
+      transition: background 0.15s ease;
+    }
+    .btn-primary:hover {
+      background: #1D4ED8;
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFFFFF;
+      color: #334155;
+      border: 1px solid #CBD5E1;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+      transition: all 0.15s ease;
+    }
+    .btn-secondary:hover {
+      background: #F8FAFC;
+      border-color: #94A3B8;
+    }
+    .btn-text {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #64748B;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 8px 12px;
+      transition: color 0.15s ease;
+    }
+    .btn-text:hover {
+      color: #0F172A;
+    }
+    .status-meta-bar {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid #F1F5F9;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      font-size: 12px;
+    }
+    @media (max-width: 768px) {
+      .status-meta-bar { grid-template-columns: repeat(2, 1fr); }
+    }
+    .meta-col .meta-label {
+      color: #94A3B8;
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+    .meta-col .meta-val {
+      font-weight: 700;
+      font-size: 13px;
+    }
+    /* Section Headers */
+    .sec-header {
+      margin-bottom: 14px;
+    }
+    .sec-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.02em;
+    }
+    .sec-subtitle {
+      font-size: 12px;
+      color: #64748B;
+      margin-top: 2px;
+    }
+    /* Workflow Grid — Matching HomePage.jsx */
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 900px) {
+      .workflow-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .workflow-grid { grid-template-columns: 1fr; }
+    }
+    .workflow-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .wf-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .wf-icon-box {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: #EFF6FF;
+      border: 1px solid #DBEAFE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2563EB;
+    }
+    .wf-icon-box svg {
+      width: 16px;
+      height: 16px;
+      stroke: #2563EB;
+    }
+    .wf-step {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: #94A3B8;
+    }
+    .wf-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0F172A;
+      margin-bottom: 2px;
+    }
+    .wf-desc {
+      font-size: 12px;
+      color: #64748B;
+      line-height: 1.5;
+    }
+    /* Taxonomy Section — Matching HomePage.jsx */
+    .taxonomy-section {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 22px 24px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+    .taxonomy-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #F1F5F9;
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+    .tax-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      background: #ECFDF5;
+      color: #047857;
+      border: 1px solid #A7F3D0;
+      border-radius: 6px;
+    }
+    .taxonomy-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 1024px) {
+      .taxonomy-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .taxonomy-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .tax-card {
+      position: relative;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      padding: 14px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      transition: all 0.15s ease;
+    }
+    .tax-card:hover {
+      border-color: #60A5FA;
+      box-shadow: 0 4px 8px rgba(37, 99, 235, 0.08);
+      transform: translateY(-1px);
+    }
+    .tax-stripe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+    .tax-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      padding-top: 2px;
+    }
+    .tax-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      background: #F1F5F9;
+      color: #475569;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .tax-icon {
+      font-size: 15px;
+    }
+    .tax-cat {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #94A3B8;
+      margin-bottom: 2px;
+    }
+    .tax-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: #0F172A;
+      line-height: 1.3;
+    }
+    .tax-bottom {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid #F1F5F9;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+    }
+    .tax-bin-pill {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      color: #FFFFFF;
+      white-space: nowrap;
+    }
+    .tax-bin-sub {
+      font-size: 10px;
+      color: #94A3B8;
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    /* API Endpoints Section */
+    .endpoints-section {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 22px 24px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
     }
     .endpoints-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 12px;
+      margin-top: 8px;
     }
     .endpoints-table th {
       background: #F8FAFC;
-      padding: 11px 14px;
+      padding: 10px 14px;
       text-align: left;
       font-weight: 600;
       color: #475569;
@@ -298,159 +597,229 @@ def root_status_report():
       font-weight: 600;
     }
     .endpoint-link:hover { text-decoration: underline; }
-    .cta-banner {
-      background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
-      color: #FFFFFF;
-      border-radius: 14px;
-      padding: 24px 28px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-top: 24px;
-      box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
-    }
-    .cta-btn {
-      background: #FFFFFF;
-      color: #1D4ED8;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 13px;
-      text-decoration: none;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      transition: all 0.15s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .cta-btn:hover { background: #F8FAFC; transform: translateY(-1px); }
-    .classes-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-    .class-pill {
-      font-size: 11px;
-      padding: 5px 11px;
-      border-radius: 8px;
-      background: #F1F5F9;
-      color: #334155;
-      font-weight: 600;
-      border: 1px solid #E2E8F0;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .class-pill span.num {
-      color: #94A3B8;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
+    /* Footer */
+    .footer {
+      border-top: 1px solid #E2E8F0;
+      padding: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: #64748B;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Hero Card — Matched with Frontend Layout Architecture -->
-    <div class="hero-card">
-      <div class="badge-pill">
-        <span>Inference Engine &amp; API Service</span>
-        <span>•</span>
-        <span>Port 5000</span>
-      </div>
 
-      <div class="hero-top">
-        <div class="brand">
-          <div class="logo">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/>
-              <path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12"/>
-              <path d="m14 16-3 3 3 3"/>
-              <path d="M8.293 13.596 7.196 9.5 3.1 10.598"/>
-              <path d="m9.344 5.811 1.093-1.892A1.83 1.83 0 0 1 11.985 3a1.784 1.784 0 0 1 1.546.888l3.943 6.843"/>
-              <path d="m13.378 9.633 4.096 1.098 1.097-4.096"/>
-            </svg>
-          </div>
-          <div>
-            <div class="brand-title">WasteSegregator <span>AI</span> — Backend Service</div>
-            <div class="hero-desc">High-performance computer vision inference runtime and municipal classification API.</div>
-          </div>
+  <!-- Top Navbar Symmetrical with Frontend -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="/" class="nav-brand">
+        <div class="nav-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/>
+            <path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12"/>
+            <path d="m14 16-3 3 3 3"/>
+            <path d="M8.293 13.596 7.196 9.5 3.1 10.598"/>
+            <path d="m9.344 5.811 1.093-1.892A1.83 1.83 0 0 1 11.985 3a1.784 1.784 0 0 1 1.546.888l3.943 6.843"/>
+            <path d="m13.378 9.633 4.096 1.098 1.097-4.096"/>
+          </svg>
         </div>
+        <div class="nav-title">WasteSegregator <span>AI</span> <span class="nav-tag">Backend Service</span></div>
+      </a>
 
+      <div class="nav-actions">
         <div class="status-badge">
           <span class="pulse-dot"></span>
-          <span>BACKEND OPERATIONAL</span>
+          <span>OPERATIONAL</span>
         </div>
-      </div>
-
-      <!-- 4-Column Metadata Strip -->
-      <div class="meta-bar">
-        <div class="meta-item">
-          <span class="label">ACTIVE NEURAL NETWORK</span>
-          <span class="val" style="color: #2563EB;">{{ model_name }}</span>
-        </div>
-        <div class="meta-item">
-          <span class="label">HARDWARE ACCELERATION</span>
-          <span class="val" style="color: #059669;">{{ hardware }}</span>
-        </div>
-        <div class="meta-item">
-          <span class="label">REGISTERED TAXONOMY</span>
-          <span class="val" style="color: #059669;">{{ classes_count }} Categories</span>
-        </div>
-        <div class="meta-item">
-          <span class="label">DATABASE STORAGE</span>
-          <span class="val" style="color: #0F172A;">SQLite Connected</span>
-        </div>
+        <a href="http://localhost:3000" target="_blank" class="nav-btn">
+          <span>Web Client (Port 3000)</span>
+          <span>→</span>
+        </a>
       </div>
     </div>
+  </header>
 
-    <!-- 3 Key Metric Cards -->
-    <div class="grid">
-      <div class="card">
-        <div class="card-label">Detection Architecture</div>
-        <div class="card-value">{{ model_name }}</div>
-        <div class="card-desc">{{ classes_count }} Registered Waste Categories Active</div>
+  <main class="main-wrap">
+
+    <!-- Hero Section — Matched to HomePage.jsx -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="badge-pill">
+          <span>Computer Vision &amp; Municipal Waste Sorting</span>
+          <span>•</span>
+          <span>Production Engine</span>
+        </div>
+
+        <h1 class="hero-title">
+          WasteSegregator <span>AI</span>
+        </h1>
+
+        <p class="hero-desc">
+          Real-time computer vision system that localizes waste items, identifies material types,
+          and provides practical disposal and recycling recommendations to support municipal circularity.
+        </p>
+
+        <div class="hero-actions">
+          <a href="http://localhost:3000/detect" target="_blank" class="btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7V5a2 2 0 0 1 2-2h2"/>
+              <path d="M17 3h2a2 2 0 0 1 2 2v2"/>
+              <path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
+              <path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
+              <line x1="7" x2="17" y1="12" y2="12"/>
+            </svg>
+            <span>Start Waste Detection</span>
+            <span>→</span>
+          </a>
+
+          <a href="http://localhost:3000/dashboard" target="_blank" class="btn-secondary">
+            View Analytics Dashboard
+          </a>
+
+          <a href="/api/health" class="btn-text">
+            <span>System Architecture &amp; Health</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/>
+              <line x1="10" x2="21" y1="14" y2="3"/>
+            </svg>
+          </a>
+        </div>
       </div>
 
-      <div class="card">
-        <div class="card-label">Compute Device</div>
-        <div class="card-value">{{ hardware }}</div>
-        <div class="card-desc">Low-Latency Real-Time Tensor Inference</div>
+      <!-- Status Callout Bar — 4-Column Metadata Strip -->
+      <div class="status-meta-bar">
+        <div class="meta-col">
+          <span class="meta-label">Model Architecture</span>
+          <span class="meta-val" style="color: #1D4ED8;">{{ model_name }}</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label">Active Taxonomy</span>
+          <span class="meta-val" style="color: #059669;">{{ classes_count }} / 15 Target Classes</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label">Hardware Acceleration</span>
+          <span class="meta-val" style="color: #059669;">{{ hardware }}</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label">Database Storage</span>
+          <span class="meta-val" style="color: #0F172A;">SQLite Connected</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- System Workflow — Exact match to HomePage.jsx -->
+    <section>
+      <div class="sec-header">
+        <h2 class="sec-title">System Workflow</h2>
+        <p class="sec-subtitle">From image capture to automated sorting recommendations</p>
       </div>
 
-      <div class="card">
-        <div class="card-label">Database &amp; Audit Logs</div>
-        <div class="card-value">SQLite WAL Storage</div>
-        <div class="card-desc">Persistent Session History &amp; Analytical Records</div>
-      </div>
-    </div>
+      <div class="workflow-grid">
+        <div class="workflow-card">
+          <div class="wf-top">
+            <div class="wf-icon-box">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="7" x2="17" y1="12" y2="12"/>
+              </svg>
+            </div>
+            <span class="wf-step">01</span>
+          </div>
+          <div>
+            <h3 class="wf-title">Image Acquisition</h3>
+            <p class="wf-desc">Upload single or multi-object waste imagery via drag-and-drop, camera capture, or sample datasets.</p>
+          </div>
+        </div>
 
-    <!-- 15 Supported Categories -->
-    <div class="card" style="margin-bottom: 24px;">
-      <div class="section-title">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/>
-          <path d="M7 7h.01"/>
-        </svg>
-        <span>15-Class Waste Taxonomy</span>
+        <div class="workflow-card">
+          <div class="wf-top">
+            <div class="wf-icon-box">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" x2="9" y1="1" y2="4"/><line x1="15" x2="15" y1="1" y2="4"/><line x1="9" x2="9" y1="20" y2="23"/><line x1="15" x2="15" y1="20" y2="23"/><line x1="20" x2="23" y1="9" y2="9"/><line x1="20" x2="23" y1="14" y2="14"/><line x1="1" x2="4" y1="9" y2="9"/><line x1="1" x2="4" y1="14" y2="14"/>
+              </svg>
+            </div>
+            <span class="wf-step">02</span>
+          </div>
+          <div>
+            <h3 class="wf-title">YOLO Detection</h3>
+            <p class="wf-desc">Inference engine localizes bounding boxes, material labels, and confidence metrics in real time.</p>
+          </div>
+        </div>
+
+        <div class="workflow-card">
+          <div class="wf-top">
+            <div class="wf-icon-box">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/><path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12"/><path d="m14 16-3 3 3 3"/><path d="M8.293 13.596 7.196 9.5 3.1 10.598"/><path d="m9.344 5.811 1.093-1.892A1.83 1.83 0 0 1 11.985 3a1.784 1.784 0 0 1 1.546.888l3.943 6.843"/><path d="m13.378 9.633 4.096 1.098 1.097-4.096"/>
+              </svg>
+            </div>
+            <span class="wf-step">03</span>
+          </div>
+          <div>
+            <h3 class="wf-title">Recommendation Engine</h3>
+            <p class="wf-desc">Independent rule-based intelligence classifies objects into Recycle, Compost, Reuse, RDF, or Special Disposal.</p>
+          </div>
+        </div>
+
+        <div class="workflow-card">
+          <div class="wf-top">
+            <div class="wf-icon-box">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+              </svg>
+            </div>
+            <span class="wf-step">04</span>
+          </div>
+          <div>
+            <h3 class="wf-title">Audit &amp; Analytics</h3>
+            <p class="wf-desc">Structured sessions and metrics are committed to local SQLite storage for longitudinal environmental tracking.</p>
+          </div>
+        </div>
       </div>
-      <div class="classes-grid">
+    </section>
+
+    <!-- 15-Class Target Taxonomy Overview — Exact match to HomePage.jsx -->
+    <section class="taxonomy-section">
+      <div class="taxonomy-head">
+        <div>
+          <h2 class="sec-title" style="font-size: 17px;">Standardized 15-Class Waste Taxonomy</h2>
+          <p class="sec-subtitle">Ontology structure designed for automated waste sorting and circular materials recovery</p>
+        </div>
+        <span class="tax-badge">15 Active Categories</span>
+      </div>
+
+      <div class="taxonomy-grid">
         {% for cls in target_classes %}
-          <span class="class-pill"><span class="num">#{{ cls.id }}</span> {{ cls.display }}</span>
+          <div class="tax-card">
+            <div class="tax-stripe" style="background-color: {{ cls.color }};"></div>
+            <div>
+              <div class="tax-top">
+                <span class="tax-id">#{{ cls.id }}</span>
+                <span class="tax-icon">{{ cls.icon }}</span>
+              </div>
+              <div class="tax-cat">{{ cls.category }}</div>
+              <div class="tax-name">{{ cls.display }}</div>
+            </div>
+            <div class="tax-bottom">
+              <span class="tax-bin-pill" style="background-color: {{ cls.color }};">
+                {{ cls.bin.split('(')[0].strip() }}
+              </span>
+              <span class="tax-bin-sub">
+                {% if '(' in cls.bin %}{{ cls.bin.split('(')[1].replace(')', '') }}{% endif %}
+              </span>
+            </div>
+          </div>
         {% endfor %}
       </div>
-    </div>
+    </section>
 
     <!-- Core API Endpoints Table -->
-    <div class="card">
-      <div class="section-title">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-        </svg>
-        <span>Available REST API Endpoints</span>
+    <section class="endpoints-section">
+      <div class="sec-header">
+        <h2 class="sec-title" style="font-size: 17px;">Available REST API Endpoints</h2>
+        <p class="sec-subtitle">Standard JSON and multipart endpoints exposed on port 5000</p>
       </div>
+
       <table class="endpoints-table">
         <thead>
           <tr>
@@ -488,7 +857,7 @@ def root_status_report():
           <tr>
             <td><span class="method get">GET</span></td>
             <td><a href="/api/history" class="endpoint-link">/api/history</a></td>
-            <td>Saved detection sessions &amp; audit records</td>
+            <td>Saved detection sessions &amp; audit records (paginated)</td>
             <td>JSON</td>
           </tr>
           <tr>
@@ -511,24 +880,14 @@ def root_status_report():
           </tr>
         </tbody>
       </table>
-    </div>
+    </section>
 
-    <!-- Frontend Client CTA Banner -->
-    <div class="cta-banner">
-      <div>
-        <div style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">Web Application Client (Port 3000)</div>
-        <div style="font-size: 12px; opacity: 0.9;">Interactive waste scanner, live webcam detection, analytics dashboard, and printable audit certificates.</div>
-      </div>
-      <a href="http://localhost:3000" target="_blank" class="cta-btn">
-        <span>Open Web Client</span>
-        <span>→</span>
-      </a>
-    </div>
+  </main>
 
-    <div style="text-align: center; margin-top: 24px; font-size: 11px; color: #94A3B8;">
-      WasteSegregator AI Backend • Port 5000 • SQLite Storage • {{ timestamp }}
-    </div>
-  </div>
+  <footer class="footer">
+    WasteSegregator AI • Municipal Circularity &amp; Computer Vision Engine • {{ timestamp }}
+  </footer>
+
 </body>
 </html>"""
 
@@ -537,7 +896,7 @@ def root_status_report():
         model_name=model_info.get("active_model_name", "YOLO11n Waste-15 Flagship"),
         classes_count=model_info.get("supported_classes_count", 15),
         hardware=model_info.get("device_display", "GPU Accelerated"),
-        target_classes=TARGET_15_CLASSES,
+        target_classes=taxonomy_cards,
         timestamp=now_str
     )
 
