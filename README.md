@@ -50,28 +50,23 @@ A modern, real-time waste detection and automated segregation system built with 
 |---|---|
 | ![Analytics Dashboard](screenshots/Dashboard-1.png) | ![Trends & Logs](screenshots/Dashboard-2.png) |
 
-### 🔬 Model Evaluation & Confusion Matrix
-| 15-Class Normalized Confusion Matrix | 100-Epoch Training Loss & Metric Curves |
-|---|---|
-| ![Normalized Confusion Matrix](screenshots/09_Confusion_Matrix_Normalized.png) | ![Training Loss and Metrics](screenshots/10_Training_Loss_and_Metrics.png) |
-
-| Precision-Recall Curve (BoxPR) | Multi-Object Detection Output |
-|---|---|
-| ![Precision-Recall Curve](screenshots/11_Precision_Recall_Curve.png) | ![AI Detection Output](screenshots/08_AI_Detection_and_Segmentation.jpg) |
-
 ### ⚡ Model Benchmarks & Engine Settings
-| Benchmark Comparison Center | 100-Epoch Loss & PR Curves |
+| Benchmark Comparison Center | 100-Epoch Training Curves |
 |---|---|
 | ![Model Benchmarks](screenshots/Model_Benchmarks-1.png) | ![Training Curves](screenshots/Model_Benchmarks-2.png) |
 
-| Engine Settings & Hardware Status | System Architecture & Compliance |
+| Normalized Confusion Matrix View | Engine Settings & Hardware Status |
 |---|---|
-| ![Engine Settings](screenshots/Engine_Settings.png) | ![System Architecture](screenshots/About_Compliance-1.png) |
+| ![Confusion Matrix View](screenshots/Model_Confusion_Matrix.png) | ![Engine Settings](screenshots/Engine_Settings.png) |
 
-### 📡 Backend REST API Service (`localhost:5000`)
-| Backend Service Status & Hero | REST API Endpoints Specification |
+### 📡 System Architecture & Backend REST API
+| System Architecture & Compliance | Backend REST Service Dashboard |
 |---|---|
-| ![Backend Server](screenshots/Backend_API_Server.png) | ![REST Endpoints](screenshots/Backend_REST_Endpoints.png) |
+| ![System Architecture](screenshots/About_Compliance-1.png) | ![Backend Server](screenshots/Backend_API_Server.png) |
+
+| REST API Endpoints Specification | Technical Guidelines & Standards |
+|---|---|
+| ![REST Endpoints](screenshots/Backend_REST_Endpoints.png) | ![Technical Specs](screenshots/About_Compliance-2.png) |
 
 ---
 
