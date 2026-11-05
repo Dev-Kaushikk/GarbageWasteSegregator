@@ -98,28 +98,31 @@ def root_status_report():
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background-color: #F8FAFC;
       color: #0F172A;
-      padding: 36px 16px;
+      padding: 32px 20px;
       line-height: 1.5;
     }
     .container {
-      max-width: 920px;
+      max-width: 1180px;
       margin: 0 auto;
     }
-    .header-card {
+    .hero-card {
       background: #FFFFFF;
       border: 1px solid #E2E8F0;
       border-radius: 16px;
-      padding: 24px 28px;
+      padding: 28px 32px;
       margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+    .hero-top {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      margin-bottom: 16px;
     }
     .brand {
       display: flex;
@@ -142,16 +145,36 @@ def root_status_report():
       height: 24px;
       stroke: #FFFFFF;
     }
-    h1 {
-      font-size: 18px;
+    .brand-title {
+      font-size: 20px;
       font-weight: 800;
       color: #0F172A;
       letter-spacing: -0.02em;
+      line-height: 1.2;
     }
-    .subtitle {
-      font-size: 12px;
+    .brand-title span {
+      color: #2563EB;
+    }
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      color: #1D4ED8;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .hero-desc {
+      font-size: 13px;
       color: #64748B;
-      font-weight: 500;
+      line-height: 1.6;
+      max-w-2xl;
     }
     .status-badge {
       display: inline-flex;
@@ -164,6 +187,7 @@ def root_status_report():
       border-radius: 999px;
       font-size: 12px;
       font-weight: 700;
+      white-space: nowrap;
     }
     .pulse-dot {
       width: 8px;
@@ -177,6 +201,25 @@ def root_status_report():
       50% { opacity: 0.4; transform: scale(0.85); }
       100% { opacity: 1; transform: scale(1); }
     }
+    .meta-bar {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid #F1F5F9;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      font-size: 12px;
+    }
+    .meta-item span.label {
+      color: #94A3B8;
+      font-size: 11px;
+      display: block;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .meta-item span.val {
+      font-weight: 700;
+    }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -187,8 +230,8 @@ def root_status_report():
       background: #FFFFFF;
       border: 1px solid #E2E8F0;
       border-radius: 14px;
-      padding: 20px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      padding: 22px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
     }
     .card-label {
       font-size: 11px;
@@ -209,12 +252,11 @@ def root_status_report():
       color: #64748B;
     }
     .section-title {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 800;
       color: #0F172A;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -226,15 +268,18 @@ def root_status_report():
     }
     .endpoints-table th {
       background: #F8FAFC;
-      padding: 10px 14px;
+      padding: 11px 14px;
       text-align: left;
       font-weight: 600;
       color: #475569;
       border-bottom: 1px solid #E2E8F0;
     }
     .endpoints-table td {
-      padding: 10px 14px;
+      padding: 11px 14px;
       border-bottom: 1px solid #F1F5F9;
+    }
+    .endpoints-table tr:hover td {
+      background: #F8FAFC;
     }
     .method {
       display: inline-block;
@@ -254,10 +299,10 @@ def root_status_report():
     }
     .endpoint-link:hover { text-decoration: underline; }
     .cta-banner {
-      background: linear-gradient(135deg, #2563EB, #1D4ED8);
+      background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
       color: #FFFFFF;
       border-radius: 14px;
-      padding: 22px 28px;
+      padding: 24px 28px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -284,80 +329,128 @@ def root_status_report():
     .classes-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
+      gap: 8px;
+      margin-top: 10px;
     }
     .class-pill {
       font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 999px;
+      padding: 5px 11px;
+      border-radius: 8px;
       background: #F1F5F9;
       color: #334155;
       font-weight: 600;
       border: 1px solid #E2E8F0;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .class-pill span.num {
+      color: #94A3B8;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Header -->
-    <div class="header-card">
-      <div class="brand">
-        <div class="logo">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/>
-            <path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12"/>
-            <path d="m14 16-3 3 3 3"/>
-            <path d="M8.293 13.596 7.196 9.5 3.1 10.598"/>
-            <path d="m9.344 5.811 1.093-1.892A1.83 1.83 0 0 1 11.985 3a1.784 1.784 0 0 1 1.546.888l3.943 6.843"/>
-            <path d="m13.378 9.633 4.096 1.098 1.097-4.096"/>
-          </svg>
+    <!-- Hero Card — Matched with Frontend Layout Architecture -->
+    <div class="hero-card">
+      <div class="badge-pill">
+        <span>Inference Engine &amp; API Service</span>
+        <span>•</span>
+        <span>Port 5000</span>
+      </div>
+
+      <div class="hero-top">
+        <div class="brand">
+          <div class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/>
+              <path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12"/>
+              <path d="m14 16-3 3 3 3"/>
+              <path d="M8.293 13.596 7.196 9.5 3.1 10.598"/>
+              <path d="m9.344 5.811 1.093-1.892A1.83 1.83 0 0 1 11.985 3a1.784 1.784 0 0 1 1.546.888l3.943 6.843"/>
+              <path d="m13.378 9.633 4.096 1.098 1.097-4.096"/>
+            </svg>
+          </div>
+          <div>
+            <div class="brand-title">WasteSegregator <span>AI</span> — Backend Service</div>
+            <div class="hero-desc">High-performance computer vision inference runtime and municipal classification API.</div>
+          </div>
         </div>
-        <div>
-          <h1>WasteSegregator <span style="color: #2563EB;">AI</span> — Backend Service</h1>
-          <div class="subtitle">Autonomous Computer Vision & Municipal Waste Segregation Engine</div>
+
+        <div class="status-badge">
+          <span class="pulse-dot"></span>
+          <span>BACKEND OPERATIONAL</span>
         </div>
       </div>
-      <div class="status-badge">
-        <span class="pulse-dot"></span>
-        <span>BACKEND OPERATIONAL</span>
+
+      <!-- 4-Column Metadata Strip -->
+      <div class="meta-bar">
+        <div class="meta-item">
+          <span class="label">ACTIVE NEURAL NETWORK</span>
+          <span class="val" style="color: #2563EB;">{{ model_name }}</span>
+        </div>
+        <div class="meta-item">
+          <span class="label">HARDWARE ACCELERATION</span>
+          <span class="val" style="color: #059669;">{{ hardware }}</span>
+        </div>
+        <div class="meta-item">
+          <span class="label">REGISTERED TAXONOMY</span>
+          <span class="val" style="color: #059669;">{{ classes_count }} Categories</span>
+        </div>
+        <div class="meta-item">
+          <span class="label">DATABASE STORAGE</span>
+          <span class="val" style="color: #0F172A;">SQLite Connected</span>
+        </div>
       </div>
     </div>
 
     <!-- 3 Key Metric Cards -->
     <div class="grid">
       <div class="card">
-        <div class="card-label">Active Neural Network</div>
+        <div class="card-label">Detection Architecture</div>
         <div class="card-value">{{ model_name }}</div>
-        <div class="card-desc">{{ classes_count }} Registered Waste Categories</div>
+        <div class="card-desc">{{ classes_count }} Registered Waste Categories Active</div>
       </div>
 
       <div class="card">
-        <div class="card-label">Hardware Acceleration</div>
+        <div class="card-label">Compute Device</div>
         <div class="card-value">{{ hardware }}</div>
-        <div class="card-desc">Low-Latency Real-Time Inference</div>
+        <div class="card-desc">Low-Latency Real-Time Tensor Inference</div>
       </div>
 
       <div class="card">
-        <div class="card-label">Database Persistence</div>
-        <div class="card-value">SQLite Connected</div>
-        <div class="card-desc">Session History & Audit Records Synced</div>
+        <div class="card-label">Database &amp; Audit Logs</div>
+        <div class="card-value">SQLite WAL Storage</div>
+        <div class="card-desc">Persistent Session History &amp; Analytical Records</div>
       </div>
     </div>
 
-    <!-- 15 Supported Classes -->
+    <!-- 15 Supported Categories -->
     <div class="card" style="margin-bottom: 24px;">
-      <div class="section-title">🏷️ Active 15-Class Waste Taxonomy</div>
+      <div class="section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/>
+          <path d="M7 7h.01"/>
+        </svg>
+        <span>15-Class Waste Taxonomy</span>
+      </div>
       <div class="classes-grid">
         {% for cls in target_classes %}
-          <span class="class-pill">#{{ cls.id }} {{ cls.display }}</span>
+          <span class="class-pill"><span class="num">#{{ cls.id }}</span> {{ cls.display }}</span>
         {% endfor %}
       </div>
     </div>
 
     <!-- Core API Endpoints Table -->
     <div class="card">
-      <div class="section-title">⚡ Available REST API Endpoints</div>
+      <div class="section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </svg>
+        <span>Available REST API Endpoints</span>
+      </div>
       <table class="endpoints-table">
         <thead>
           <tr>
@@ -371,43 +464,43 @@ def root_status_report():
           <tr>
             <td><span class="method get">GET</span></td>
             <td><a href="/api/health" class="endpoint-link">/api/health</a></td>
-            <td>System status, active model & hardware info</td>
+            <td>System status, active model &amp; hardware info</td>
             <td>JSON</td>
           </tr>
           <tr>
             <td><span class="method get">GET</span></td>
             <td><a href="/api/classes" class="endpoint-link">/api/classes</a></td>
-            <td>15-Class waste taxonomy & bin mapping</td>
+            <td>15-Class waste taxonomy &amp; bin mapping</td>
             <td>JSON</td>
           </tr>
           <tr>
             <td><span class="method get">GET</span></td>
             <td><a href="/api/model-info" class="endpoint-link">/api/model-info</a></td>
-            <td>Model checkpoints, resolution & accuracy metrics</td>
+            <td>Model checkpoints, resolution &amp; accuracy metrics</td>
             <td>JSON</td>
           </tr>
           <tr>
             <td><span class="method post">POST</span></td>
             <td><span class="endpoint-link">/api/detect</span></td>
-            <td>Computer Vision waste detection & segregation engine</td>
+            <td>Waste detection, localization &amp; segregation recommendations</td>
             <td>Multipart / JSON</td>
           </tr>
           <tr>
             <td><span class="method get">GET</span></td>
             <td><a href="/api/history" class="endpoint-link">/api/history</a></td>
-            <td>Saved detection sessions & audit records</td>
+            <td>Saved detection sessions &amp; audit records</td>
             <td>JSON</td>
           </tr>
           <tr>
             <td><span class="method get">GET</span></td>
             <td><a href="/api/analytics" class="endpoint-link">/api/analytics</a></td>
-            <td>Material distribution & recyclability statistics</td>
+            <td>Material distribution &amp; recyclability statistics</td>
             <td>JSON</td>
           </tr>
           <tr>
             <td><span class="method get">GET</span></td>
             <td><a href="/api/training/runs" class="endpoint-link">/api/training/runs</a></td>
-            <td>Model training runs & empirical loss curves</td>
+            <td>Model training runs &amp; empirical loss curves</td>
             <td>JSON</td>
           </tr>
           <tr>
@@ -420,20 +513,20 @@ def root_status_report():
       </table>
     </div>
 
-    <!-- Frontend UI CTA Banner -->
+    <!-- Frontend Client CTA Banner -->
     <div class="cta-banner">
       <div>
-        <div style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">Frontend User Interface is Ready!</div>
-        <div style="font-size: 12px; opacity: 0.9;">Run real-time webcam detection, voice guidance, and audit certificates on port 3000.</div>
+        <div style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">Web Application Client (Port 3000)</div>
+        <div style="font-size: 12px; opacity: 0.9;">Interactive waste scanner, live webcam detection, analytics dashboard, and printable audit certificates.</div>
       </div>
       <a href="http://localhost:3000" target="_blank" class="cta-btn">
-        <span>Open Frontend UI (Port 3000)</span>
+        <span>Open Web Client</span>
         <span>→</span>
       </a>
     </div>
 
-    <div style="text-align: center; margin-top: 20px; font-size: 11px; color: #94A3B8;">
-      Server Port: 5000 • Report Generated: {{ timestamp }}
+    <div style="text-align: center; margin-top: 24px; font-size: 11px; color: #94A3B8;">
+      WasteSegregator AI Backend • Port 5000 • SQLite Storage • {{ timestamp }}
     </div>
   </div>
 </body>
