@@ -45,13 +45,13 @@ A modern, real-time waste detection and automated segregation system built with 
 | ![Audit Certificate](screenshots/Audit_Report_Certificate.png) |
 
 ### 📊 Analytics Dashboard & Session Archive
-| Real-Time KPIs & Circular Recovery | Material Distribution & Activity Trends |
+| Real-Time KPIs & Circular Recovery | Material Distribution Trends |
 |---|---|
 | ![Analytics Dashboard](screenshots/Dashboard-1.png) | ![Trends & Logs](screenshots/Dashboard-2.png) |
 
-| Paginated Session History (10 Items/Page) | Session Archive (Page 2 Navigation) |
-|---|---|
-| ![History Page 1](screenshots/History-1.png) | ![History Page 2](screenshots/History-2.png) |
+| History Page |
+|:---:|
+| ![History Page](screenshots/History-1.png) |
 
 ### ⚡ Model Benchmarks & Engine Settings
 | Benchmark Comparison Center | 100-Epoch Training Loss & PR Curves |
@@ -66,10 +66,6 @@ A modern, real-time waste detection and automated segregation system built with 
 | Backend Service Status & Hero | REST API Endpoints Table |
 |---|---|
 | ![Backend Server](screenshots/Backend_API_Server.png) | ![REST Endpoints](screenshots/Backend_REST_Endpoints.png) |
-
-| Database Schema & Taxonomy Grid | Technical Specifications & Standards |
-|---|---|
-| ![Backend Taxonomy](screenshots/Backend_Database_Schema.png) | ![Technical Specs](screenshots/About_Compliance-2.png) |
 
 ---
 
