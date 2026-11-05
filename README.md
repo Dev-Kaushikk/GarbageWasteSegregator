@@ -59,6 +59,15 @@ A modern, real-time waste detection and automated segregation system built with 
 |---|---|
 | ![Confusion Matrix View](screenshots/Model_Confusion_Matrix.png) | ![Engine Settings](screenshots/Engine_Settings.png) |
 
+### 📈 Performance & Model Evaluation
+| 15-Class Normalized Confusion Matrix | 100-Epoch Training Loss & Metrics |
+|---|---|
+| ![Normalized Confusion Matrix](screenshots/09_Confusion_Matrix_Normalized.png) | ![Training Loss and Metrics](screenshots/10_Training_Loss_and_Metrics.png) |
+
+| Precision-Recall Curve (BoxPR) | Multi-Object AI Detection Output |
+|---|---|
+| ![Precision-Recall Curve](screenshots/11_Precision_Recall_Curve.png) | ![AI Detection Output](screenshots/08_AI_Detection_and_Segmentation.jpg) |
+
 ### 📡 System Architecture & Backend REST API
 | System Architecture & Compliance | Backend REST Service Dashboard |
 |---|---|
@@ -177,22 +186,12 @@ GarbageWasteSegregator/
 
 ---
 
-## 📈 Performance & Model Evaluation
+## 📈 Model Performance Highlights
 
 - **Flagship Model**: YOLO11n trained for 100 epochs on 8,718 master images
 - **mAP50**: **66.2%**
 - **Precision**: **72.3%** (yolo11s @ 800px) / **77.0%** (Kaggle master peak)
 - **Inference Speed**: **<100ms** on Apple Silicon (MPS) and NVIDIA GPUs
-
-### 🔬 Empirical Evaluation & Metrics
-
-| 15-Class Normalized Confusion Matrix | 100-Epoch Training Loss & Metric Curves |
-|---|---|
-| ![Normalized Confusion Matrix](screenshots/09_Confusion_Matrix_Normalized.png) | ![Training Loss and Metrics](screenshots/10_Training_Loss_and_Metrics.png) |
-
-| Precision-Recall Curve (BoxPR Across 15 Classes) | Multi-Object Detection & Localization Output |
-|---|---|
-| ![Precision-Recall Curve](screenshots/11_Precision_Recall_Curve.png) | ![AI Detection Output](screenshots/08_AI_Detection_and_Segmentation.jpg) |
 
 ---
 
