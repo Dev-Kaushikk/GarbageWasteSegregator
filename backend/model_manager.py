@@ -157,7 +157,7 @@ REGISTERED_MODELS = {
         "precision": None,
         "recall": None,
         "image_size": 640,
-        "path": PROJECT_ROOT / "yolo11n.pt",
+        "path": PROJECT_ROOT / "models" / "yolo11n.pt",
         "description": "Generic pre-trained YOLO11 nano model on 80 COCO classes."
     }
 }

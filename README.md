@@ -263,7 +263,8 @@ GarbageWasteSegregator/
 │   │   │   ├── HomePage.jsx       # Landing page & system architecture
 │   │   │   ├── DetectionPage.jsx  # Live waste scanner & model switcher
 │   │   │   ├── DashboardPage.jsx  # SQLite analytics, metrics & charts
-│   │   │   ├── HistoryPage.jsx    # Session archive with filtering
+│   │   │   ├── HistoryPage.jsx    # Session archive with pagination & filtering
+│   │   │   ├── TrainingPage.jsx   # Model benchmarks & training loss curves
 │   │   │   ├── AboutPage.jsx      # Research documentation & compliance
 │   │   │   └── SettingsPage.jsx   # Model engine configuration & device status
 │   │   ├── components/            # Reusable UI components & modals
@@ -271,13 +272,26 @@ GarbageWasteSegregator/
 │   │   │   ├── Layout.jsx         # App shell & footer
 │   │   │   ├── EcoImpactCard.jsx  # Sustainability metrics card
 │   │   │   ├── AuditCertificateModal.jsx # Official municipal waste audit certificate
-│   │   │   ├── MaterialDossierModal.jsx  # In-depth material compliance modal
-│   │   │   └── Training.js        # Model training benchmark & loss curves
+│   │   │   └── MaterialDossierModal.jsx  # In-depth material compliance modal
 │   │   ├── services/
 │   │   │   └── api.js             # Centralized Axios REST client
 │   │   └── utils/
-│   │       └── constants.js       # 15-Class taxonomy & disposal badge styles
+│   │       ├── constants.js       # 15-Class taxonomy & disposal badge styles
+│   │       └── formatters.js      # Number & metric formatting utilities
 │   └── package.json               # Frontend dependencies & React scripts
+│
+├── training/                      # Dataset prep & model training pipeline
+│   ├── README.md                  # Training & dataset pipeline documentation
+│   ├── build_15class_master_dataset.py # Master 15-class dataset builder
+│   ├── augment_minority_classes.py     # Class-aware geometric & photometric augmentation
+│   ├── boost_dataset_balance.py        # Dataset rebalancer & sample booster
+│   ├── package_dataset.py              # Cloud archive packager for remote training
+│   ├── train_15class_master.py         # 100-Epoch local training runner (MPS/CUDA)
+│   ├── finetune_balanced_model.py      # Fine-tuning runner for balanced weights
+│   ├── resume_offline_training.py      # Checkpoint resume & recovery utility
+│   ├── generate_kaggle_notebook.py     # Kaggle training notebook generator
+│   ├── kaggle_train_script.py          # Standalone cloud training script
+│   └── waste_segregator_kaggle_master.ipynb # Kaggle master training notebook
 │
 ├── datasets/
 │   └── waste_15class_master/      # 8,718 Train + 635 Val balanced dataset
@@ -286,7 +300,8 @@ GarbageWasteSegregator/
 │   ├── yolo11n_15class_best.pt        # 100-Epoch Flagship model (66.2% mAP)
 │   ├── yolo11s_15class_best.pt        # 100-Epoch Small model (72.3% P @ 800px)
 │   ├── yolo11n_15class_kaggle_best.pt # 100-Epoch Kaggle Master (77.0% peak P @ 800px)
-│   └── yolo11n_15class_balanced_best.pt # 30-Epoch fine-tuned checkpoint
+│   ├── yolo11n_15class_balanced_best.pt # 30-Epoch fine-tuned checkpoint
+│   └── yolo11n.pt                     # Base pre-trained YOLO11 nano model
 │
 ├── runs/
 │   └── detect/runs/garbage/       # Training runs, PR curves, and confusion matrices
@@ -295,7 +310,6 @@ GarbageWasteSegregator/
 ├── test_images/                   # Verification images (11.png, 12.png, 13.png)
 ├── start.sh                       # 1-Click launcher for both backend & frontend
 ├── stop.sh                        # 1-Click shutdown script
-├── package_dataset.py             # Dataset packaging script for cloud GPU training
 ├── README.md                      # Master repository documentation
 └── LICENSE                        # MIT License
 ```

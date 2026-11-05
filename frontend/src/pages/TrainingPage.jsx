@@ -1,7 +1,7 @@
 /**
- * Training & Model Evaluation Dashboard Component
- * AI-Based Smart Garbage Waste Segregator
- * Flagship 15-Class YOLO11n evaluation with training curves, confusion matrix, and taxonomy breakdown.
+ * Model Benchmarks & Training Evaluation Dashboard
+ * WasteSegregator AI
+ * 15-Class YOLO11n evaluation with training curves, confusion matrix, and taxonomy breakdown.
  */
 import React, { useState, useEffect } from 'react';
 import {
@@ -19,7 +19,7 @@ import {
 import { getTrainingRuns, getRunPlotUrl } from '../services/api';
 import { TARGET_15_CLASSES } from '../utils/constants';
 
-const Training = () => {
+const TrainingPage = () => {
   const [runs, setRuns] = useState([]);
   const [selectedRun, setSelectedRun] = useState(null);
   const [activePlotTab, setActivePlotTab] = useState('results'); // 'results', 'confusion', 'pr', 'f1', 'preds'
@@ -327,4 +327,4 @@ const Training = () => {
   );
 };
 
-export default Training;
+export default TrainingPage;

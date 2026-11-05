@@ -118,10 +118,10 @@ start_backend() {
     fi
 
     # Check if model exists
-    if [[ -f "$PROJECT_ROOT/yolo11n.pt" ]]; then
-        echo -e "${GREEN}✅ YOLO model found ($PROJECT_ROOT/yolo11n.pt)${NC}"
+    if [[ -f "$PROJECT_ROOT/models/yolo11n.pt" ]] || [[ -f "$PROJECT_ROOT/yolo11n.pt" ]]; then
+        echo -e "${GREEN}✅ YOLO model found ($PROJECT_ROOT/models/yolo11n.pt)${NC}"
     else
-        echo -e "${YELLOW}⚠️  YOLO model not found ($PROJECT_ROOT/yolo11n.pt)${NC}"
+        echo -e "${YELLOW}⚠️  YOLO model not found in models/ directory${NC}"
         echo -e "${YELLOW}   Prediction API will use mock data${NC}"
     fi
 

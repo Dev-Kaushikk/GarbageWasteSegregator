@@ -13,7 +13,7 @@ import DetectionPage from './pages/DetectionPage';
 import HistoryPage from './pages/HistoryPage';
 import AboutPage from './pages/AboutPage';
 import SettingsPage from './pages/SettingsPage';
-import Training from './components/Training';
+import TrainingPage from './pages/TrainingPage';
 
 import './styles/global.css';
 
@@ -30,7 +30,8 @@ const App = () => {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/analytics" element={<DashboardPage />} />
           <Route path="/history" element={<HistoryPage />} />
-          <Route path="/training" element={<Training />} />
+          <Route path="/training" element={<TrainingPage />} />
+          <Route path="/benchmarks" element={<TrainingPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/settings" element={<SettingsPage />} />
 

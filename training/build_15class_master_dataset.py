@@ -15,7 +15,7 @@ from pathlib import Path
 from collections import Counter, defaultdict
 import yaml
 
-PROJECT_ROOT = Path("/Users/devkaushik/Desktop/GarbageWasteSegregator")
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_DIR = PROJECT_ROOT / "datasets" / "waste_15class_master"
 EXTRA_DIR = Path.home() / "Downloads" / "waste_datasets_extra"
 TACO_YOLO = PROJECT_ROOT / "datasets" / "taco_yolo"

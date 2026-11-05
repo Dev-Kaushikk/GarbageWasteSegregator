@@ -17,7 +17,7 @@ from pathlib import Path
 from collections import Counter
 from PIL import Image, ImageEnhance, ImageOps
 
-DATASET_ROOT = Path("/Users/devkaushik/Desktop/GarbageWasteSegregator/datasets/waste_15class_master")
+DATASET_ROOT = Path(__file__).resolve().parent.parent / "datasets" / "waste_15class_master"
 IMG_TRAIN = DATASET_ROOT / "images" / "train"
 LBL_TRAIN = DATASET_ROOT / "labels" / "train"
 

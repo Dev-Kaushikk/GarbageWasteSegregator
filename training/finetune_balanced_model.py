@@ -20,7 +20,7 @@ os.environ.setdefault("YOLO_CONFIG_DIR", "/tmp/ultralytics")
 import torch
 from ultralytics import YOLO
 
-PROJECT_ROOT = Path(__file__).resolve().parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATASET_YAML = PROJECT_ROOT / "datasets" / "waste_15class_master" / "data.yaml"
 BASE_WEIGHTS = PROJECT_ROOT / "models" / "yolo11n_15class_best.pt"
 OUTPUT_DIR = PROJECT_ROOT / "runs" / "detect" / "runs" / "garbage"

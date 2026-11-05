@@ -1,11 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /**
- * Garbage Waste Segregator Frontend - Styles
- *
- * Centralized CSS reset and global styles for the project.
+ * WasteSegregator AI — Global CSS Utilities & Animations
  */
 
 /* Reset */

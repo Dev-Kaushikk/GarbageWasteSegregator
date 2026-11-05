@@ -38,7 +38,7 @@ User → Frontend (React) ←→ Backend API (Flask)
                         ↓
                   Backend Endpoints
                         ↓
-              Pre-trained Model (yolo11n.pt)
+              Pre-trained Model (models/yolo11n.pt)
 ```
 
 ## Communication Protocols

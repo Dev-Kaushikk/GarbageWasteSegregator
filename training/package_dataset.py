@@ -8,7 +8,7 @@ import sys
 import zipfile
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).resolve().parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATASET_DIR = PROJECT_ROOT / "datasets" / "waste_15class_master"
 OUTPUT_ZIP = PROJECT_ROOT / "datasets" / "waste_15class_master_balanced.zip"
 

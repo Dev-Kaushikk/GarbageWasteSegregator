@@ -157,7 +157,7 @@ Schedule via cron:
 ### Model Backups
 ```bash
 # Backup model weights
-cp yolo11n.pt /backups/yolo11n_backup_$(date +%Y%m%d).pt
+cp models/yolo11n.pt /backups/yolo11n_backup_$(date +%Y%m%d).pt
 ```
 
 ## Security Considerations
