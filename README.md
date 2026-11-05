@@ -35,35 +35,41 @@ A modern, real-time waste detection and automated segregation system built with 
 |---|---|
 | ![Home Landing](screenshots/Home-1.png) | ![Taxonomy & Workflow](screenshots/Home-2.png) |
 
-### 🔍 Live Waste Scanner & Official Audit Certificate
+### 🔍 Waste Scanner & Smart Recommendations
 | Multi-Object Detection & Bounding Boxes | Actionable Disposal Recommendations |
 |---|---|
 | ![Waste Scanner](screenshots/Waste_Scanner-1.png) | ![Scanner Recommendations](screenshots/Waste_Scanner-2.png) |
 
-| Certified Municipal Waste Audit Report |
-|:---:|
-| ![Audit Certificate](screenshots/Audit_Report_Certificate.png) |
+### 📋 Audit Certification & Session History
+| Certified Municipal Waste Audit Report | History Page |
+|---|---|
+| ![Audit Certificate](screenshots/Audit_Report_Certificate.png) | ![History Page](screenshots/History-1.png) |
 
-### 📊 Analytics Dashboard & Session Archive
+### 📊 Analytics Dashboard & Activity Trends
 | Real-Time KPIs & Circular Recovery | Material Distribution Trends |
 |---|---|
 | ![Analytics Dashboard](screenshots/Dashboard-1.png) | ![Trends & Logs](screenshots/Dashboard-2.png) |
 
-| History Page |
-|:---:|
-| ![History Page](screenshots/History-1.png) |
+### 🔬 Model Evaluation & Confusion Matrix
+| 15-Class Normalized Confusion Matrix | 100-Epoch Training Loss & Metric Curves |
+|---|---|
+| ![Normalized Confusion Matrix](screenshots/09_Confusion_Matrix_Normalized.png) | ![Training Loss and Metrics](screenshots/10_Training_Loss_and_Metrics.png) |
+
+| Precision-Recall Curve (BoxPR) | Multi-Object Detection Output |
+|---|---|
+| ![Precision-Recall Curve](screenshots/11_Precision_Recall_Curve.png) | ![AI Detection Output](screenshots/08_AI_Detection_and_Segmentation.jpg) |
 
 ### ⚡ Model Benchmarks & Engine Settings
-| Benchmark Comparison Center | 100-Epoch Training Loss & PR Curves |
+| Benchmark Comparison Center | 100-Epoch Loss & PR Curves |
 |---|---|
 | ![Model Benchmarks](screenshots/Model_Benchmarks-1.png) | ![Training Curves](screenshots/Model_Benchmarks-2.png) |
 
-| Engine Settings & Model Switcher | System Architecture & Compliance |
+| Engine Settings & Hardware Status | System Architecture & Compliance |
 |---|---|
 | ![Engine Settings](screenshots/Engine_Settings.png) | ![System Architecture](screenshots/About_Compliance-1.png) |
 
 ### 📡 Backend REST API Service (`localhost:5000`)
-| Backend Service Status & Hero | REST API Endpoints Table |
+| Backend Service Status & Hero | REST API Endpoints Specification |
 |---|---|
 | ![Backend Server](screenshots/Backend_API_Server.png) | ![REST Endpoints](screenshots/Backend_REST_Endpoints.png) |
 
