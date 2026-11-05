@@ -58,7 +58,8 @@ const DashboardPage = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white border border-slate-200 rounded-xl p-5 sm:p-6 shadow-xs">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <h1 className="text-xl font-bold text-slate-900 tracking-tight">System Performance & Waste Dashboard</h1>
+            <TrendingUp className="w-5 h-5 text-blue-600" />
+            <h1 className="text-xl font-bold text-slate-900 tracking-tight">Analytics & Waste Dashboard</h1>
             <span className="text-[11px] px-2.5 py-0.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full font-semibold">
               Live SQLite Data
             </span>

@@ -1,6 +1,6 @@
 /**
- * AI-Based Smart Garbage Waste Segregator — Constants & Taxonomy
- * Exactly maps the 15-class target taxonomy and AutomataX theme parameters.
+ * WasteSegregator AI — Constants & Taxonomy
+ * Maps the 15-class target taxonomy and disposal classifications.
  */
 
 // Target 15-Class Waste Taxonomy
@@ -56,7 +56,7 @@ export const getClassInfo = (idOrName) => {
   };
 };
 
-// AutomataX Restrained Disposal Action Badges
+// Standard Disposal Action Badges
 export const DISPOSAL_BADGES = {
   Recycle: {
     label: 'Recycle',

@@ -1,7 +1,6 @@
 /**
- * Home / Landing Page
- * AI-Based Smart Garbage Waste Segregator
- * Designed following the clean AutomataX academic interface style.
+ * Home Page
+ * WasteSegregator AI
  */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -89,7 +88,7 @@ const HomePage = () => {
       icon: Leaf,
     },
     {
-      title: 'Local Data Sovereignty',
+      title: 'Local Database Storage',
       desc: 'All detection sessions and analytics are recorded locally in a high-performance SQLite database.',
       icon: Database,
     },
@@ -106,25 +105,24 @@ const HomePage = () => {
       <section className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 shadow-xs">
         <div className="max-w-3xl space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold uppercase tracking-wider">
-            <span>Machine Learning & Computer Vision Research</span>
+            <span>Computer Vision & Municipal Waste Sorting</span>
             <span>•</span>
-            <span>v2.0</span>
+            <span>Production Engine</span>
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            AI-Based Smart Garbage Waste Segregator
+            WasteSegregator <span className="text-blue-600">AI</span>
           </h1>
 
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            An intelligent computer vision system that localizes waste objects, identifies material categories,
-            and generates deterministic, rule-based segregation recommendations to support municipal circularity
-            and responsible disposal.
+            Real-time computer vision system that localizes waste items, identifies material types,
+            and provides practical disposal and recycling recommendations to support municipal circularity.
           </p>
 
           <div className="flex flex-wrap items-center gap-3 pt-1">
             <button
               onClick={() => navigate('/detect')}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-xs sm:text-sm font-semibold rounded-lg shadow-xs flex items-center gap-2 transition-colors"
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-xs sm:text-sm font-semibold rounded-lg shadow-xs flex items-center gap-2 transition-colors cursor-pointer"
             >
               <ScanLine className="w-4 h-4" />
               <span>Start Waste Detection</span>
@@ -133,16 +131,16 @@ const HomePage = () => {
 
             <button
               onClick={() => navigate('/dashboard')}
-              className="px-4 py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 text-xs sm:text-sm font-medium rounded-lg shadow-xs transition-colors"
+              className="px-4 py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 text-xs sm:text-sm font-medium rounded-lg shadow-xs transition-colors cursor-pointer"
             >
-              View Dashboard Analytics
+              View Analytics Dashboard
             </button>
 
             <button
               onClick={() => navigate('/about')}
-              className="px-3.5 py-2 text-slate-500 hover:text-slate-800 text-xs sm:text-sm font-medium transition-colors flex items-center gap-1.5"
+              className="px-3.5 py-2 text-slate-500 hover:text-slate-800 text-xs sm:text-sm font-medium transition-colors flex items-center gap-1.5 cursor-pointer"
             >
-              <span>Project Documentation</span>
+              <span>System Architecture</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -173,7 +171,7 @@ const HomePage = () => {
       <section className="space-y-3">
         <div>
           <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">System Workflow</h2>
-          <p className="text-xs text-slate-500">Separation of Computer Vision localization from environmental decision logic</p>
+          <p className="text-xs text-slate-500">From image capture to automated sorting recommendations</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">

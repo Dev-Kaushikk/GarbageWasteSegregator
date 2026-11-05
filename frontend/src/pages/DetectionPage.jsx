@@ -460,7 +460,8 @@ const DetectionPage = () => {
       <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <h1 className="text-xl font-bold text-slate-900 tracking-tight">AI Waste Detection Workspace</h1>
+            <ScanLine className="w-5 h-5 text-blue-600" />
+            <h1 className="text-xl font-bold text-slate-900 tracking-tight">Waste Detection Workspace</h1>
             <span className="text-[11px] px-2 py-0.5 bg-blue-50 text-blue-700 border border-blue-200 rounded font-semibold">
               {modelInfo?.active_model_name || 'YOLO11n Waste-15 (Flagship Master Model)'}
             </span>

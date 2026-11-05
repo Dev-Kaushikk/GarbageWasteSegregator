@@ -1,6 +1,6 @@
 /**
- * AI-Based Smart Garbage Waste Segregator Frontend
- * Main Router & Application Container following the AutomataX theme.
+ * WasteSegregator AI Frontend
+ * Main Router & Application Container.
  */
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';

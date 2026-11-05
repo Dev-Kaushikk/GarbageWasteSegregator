@@ -1,7 +1,6 @@
 /**
- * About / Project Information Page
- * AI-Based Smart Garbage Waste Segregator
- * Structured academic ML project documentation following the AutomataX style.
+ * About / System Documentation Page
+ * WasteSegregator AI
  */
 import React from 'react';
 import {
@@ -42,7 +41,7 @@ const AboutPage = () => {
       color: 'text-emerald-600 bg-emerald-50 border-emerald-100',
     },
     {
-      title: 'Edge Data Sovereignty',
+      title: 'Local Privacy & Storage',
       desc: 'Store all detection logs and analytical trends locally in SQLite with zero off-device image transmission.',
       icon: Lock,
       color: 'text-amber-600 bg-amber-50 border-amber-100',
@@ -118,20 +117,19 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6">
+    <div className="space-y-6">
       {/* Title Header Banner */}
       <div className="bg-white border border-slate-200 rounded-xl p-6 sm:p-7 shadow-xs space-y-3">
         <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold rounded-md uppercase tracking-wider">
-          <span>Academic Project Overview</span>
+          <span>Architecture & System Documentation</span>
           <span>•</span>
           <span>Computer Vision & Circular Economy</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-          AI-Based Smart Garbage Waste Segregator
+          WasteSegregator <span className="text-blue-600">AI</span>
         </h1>
         <p className="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-3xl">
-          An end-to-end framework integrating deep learning object localization with an independent,
-          rule-based environmental recommendation engine to automate municipal waste segregation and accelerate material recovery.
+          An integrated computer vision framework with dedicated recommendation logic to automate municipal waste segregation and accelerate material recovery.
         </p>
 
         <div className="pt-2 flex flex-wrap items-center gap-2 text-xs">
@@ -155,9 +153,9 @@ const AboutPage = () => {
         <div>
           <h2 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
             <Target className="w-4 h-4 text-blue-600" />
-            <span>Problem Statement & Research Objectives</span>
+            <span>System Objectives & Material Recovery</span>
           </h2>
-          <p className="text-xs text-slate-500 mt-0.5">The environmental necessity for automated source segregation</p>
+          <p className="text-xs text-slate-500 mt-0.5">Automated source segregation to increase recycling recovery rates</p>
         </div>
 
         <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed">

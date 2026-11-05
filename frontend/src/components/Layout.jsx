@@ -1,6 +1,5 @@
 /**
- * AutomataX Layout Component
- * AI-Based Smart Garbage Waste Segregator
+ * WasteSegregator AI Layout Component
  */
 import React from 'react';
 import Navbar from './Navbar';
@@ -17,7 +16,7 @@ const Layout = ({ children }) => {
         {children}
       </main>
 
-      {/* Academic Footer */}
+      {/* Footer */}
       <footer className="bg-white border-t border-slate-200 py-5 mt-auto text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
