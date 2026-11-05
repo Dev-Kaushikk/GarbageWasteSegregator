@@ -30,17 +30,46 @@ A modern, real-time waste detection and automated segregation system built with 
 
 ## 📸 Application Preview
 
-| Waste Scanner & Bounding Boxes | Official Audit Certificate |
+### 🏠 Landing Page & System Workflow
+| Home Landing & System Status | Workflow Steps & 15-Class Taxonomy |
 |---|---|
-| ![Waste Scanner](screenshots/Waste_Scanner-1.png) | ![Audit Certificate](screenshots/Audit_Report_Certificate.png) |
+| ![Home Landing](screenshots/Home-1.png) | ![Taxonomy & Workflow](screenshots/Home-2.png) |
 
-| Analytics Dashboard | Paginated Session History |
+### 🔍 Live Waste Scanner & Official Audit Certificate
+| Multi-Object Detection & Bounding Boxes | Actionable Disposal Recommendations |
 |---|---|
-| ![Analytics Dashboard](screenshots/Dashboard-1.png) | ![History](screenshots/History-1.png) |
+| ![Waste Scanner](screenshots/Waste_Scanner-1.png) | ![Scanner Recommendations](screenshots/Waste_Scanner-2.png) |
 
-| Model Benchmark Center | Backend Service & API |
+| Certified Municipal Waste Audit Report |
+|:---:|
+| ![Audit Certificate](screenshots/Audit_Report_Certificate.png) |
+
+### 📊 Analytics Dashboard & Session Archive
+| Real-Time KPIs & Circular Recovery | Material Distribution & Activity Trends |
 |---|---|
-| ![Model Benchmarks](screenshots/Model_Benchmarks-1.png) | ![Backend Server](screenshots/Backend_API_Server.png) |
+| ![Analytics Dashboard](screenshots/Dashboard-1.png) | ![Trends & Logs](screenshots/Dashboard-2.png) |
+
+| Paginated Session History (10 Items/Page) | Session Archive (Page 2 Navigation) |
+|---|---|
+| ![History Page 1](screenshots/History-1.png) | ![History Page 2](screenshots/History-2.png) |
+
+### ⚡ Model Benchmarks & Engine Settings
+| Benchmark Comparison Center | 100-Epoch Training Loss & PR Curves |
+|---|---|
+| ![Model Benchmarks](screenshots/Model_Benchmarks-1.png) | ![Training Curves](screenshots/Model_Benchmarks-2.png) |
+
+| Engine Settings & Model Switcher | System Architecture & Compliance |
+|---|---|
+| ![Engine Settings](screenshots/Engine_Settings.png) | ![System Architecture](screenshots/About_Compliance-1.png) |
+
+### 📡 Backend REST API Service (`localhost:5000`)
+| Backend Service Status & Hero | REST API Endpoints Table |
+|---|---|
+| ![Backend Server](screenshots/Backend_API_Server.png) | ![REST Endpoints](screenshots/Backend_REST_Endpoints.png) |
+
+| Database Schema & Taxonomy Grid | Technical Specifications & Standards |
+|---|---|
+| ![Backend Taxonomy](screenshots/Backend_Database_Schema.png) | ![Technical Specs](screenshots/About_Compliance-2.png) |
 
 ---
 
