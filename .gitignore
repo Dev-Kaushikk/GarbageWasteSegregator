@@ -46,6 +46,10 @@ ziSleSkb
 .LSOverride
 ._*
 
+# Video recordings & generator scripts (Local only)
+*.mp4
+generate_demo_video.py
+
 # IDE & Editor
 .vscode/
 .idea/
